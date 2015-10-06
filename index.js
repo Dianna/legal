@@ -4,13 +4,14 @@ var spawn = require('child_process').spawn;
 var prc = spawn('npm', ['ls', '--json', '--long']);
 var data = '';
 var includes = ["name", "version", "licenses", "license", "dependencies"];
-var modules;
 var request = require('request');
 var path = require('path');
 var appDir = path.dirname(require.main.filename);
 
 var host = 'http://127.0.0.1:8008/';
 var uri = 'http://127.0.0.1:8008/post'
+
+var modules;
 
 var parseModule = function(data) {
 
@@ -128,7 +129,7 @@ module.exports = function() {
     }, function(error, response, body) {
       console.log(body);
       if (!error && response.statusCode === 201) {
-        console.log('Data posted to remote. \n Get result details, visit: ' + host + 'get/' + body.data._id);
+        console.log('Data posted to remote. \n Get result details, visit: ' + host + '#/get/' + body.data._id);
       }
       if (error) console.log('Can not post data to remote. ', error)
     });
